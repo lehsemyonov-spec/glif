@@ -10,6 +10,8 @@ import { initSectionCounter } from './ui/sectionCounter';
 import { initEmBox } from './ui/emBox';
 import { initCursor } from './ui/cursor';
 import { initHeroGlyph } from './type/VariableGlyph';
+import { initScroll } from './scroll/timeline';
+import { initAnatomy } from './type/anatomy';
 
 async function boot() {
   initGridLines();
@@ -22,6 +24,8 @@ async function boot() {
   initEmBox();
   initHeroGlyph();
   initCursor();
+  initScroll();
+  initAnatomy().catch((err) => console.error('Анатомия не загрузилась:', err));
 
   // ?debug в адресе или #debug (на хостингах, где query-строка недоступна)
   if (new URLSearchParams(location.search).has('debug') || location.hash === '#debug') {
