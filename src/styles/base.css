@@ -167,6 +167,43 @@ body:not(.is-loading) .preloader {
   }
 }
 
+/* ---------- Курсор ---------- */
+html.has-cursor,
+html.has-cursor * {
+  cursor: none !important;
+}
+.cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 200;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: var(--paper);
+  mix-blend-mode: difference;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform;
+}
+.cursor::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  transform: scale(var(--s, 1));
+  transition: transform 0.35s var(--ease-expo);
+}
+.cursor { background: none; }
+.cursor::after { background: var(--paper); }
+.cursor.is-visible { opacity: 1; }
+.cursor.is-link { --s: 3; }
+.cursor.is-glyph { --s: 5; }
+.cursor.is-down { --s: 0.6; }
+.cursor.is-glyph.is-down { --s: 3.6; }
+
 /* ---------- Номер раздела ---------- */
 .section-counter {
   position: fixed;

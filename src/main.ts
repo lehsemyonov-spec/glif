@@ -8,6 +8,8 @@ import { createPreloader } from './ui/preloader';
 import { initGridLines } from './ui/grid';
 import { initSectionCounter } from './ui/sectionCounter';
 import { initEmBox } from './ui/emBox';
+import { initCursor } from './ui/cursor';
+import { initHeroGlyph } from './type/VariableGlyph';
 
 async function boot() {
   initGridLines();
@@ -18,6 +20,8 @@ async function boot() {
 
   initSectionCounter();
   initEmBox();
+  initHeroGlyph();
+  initCursor();
 
   // ?debug в адресе или #debug (на хостингах, где query-строка недоступна)
   if (new URLSearchParams(location.search).has('debug') || location.hash === '#debug') {

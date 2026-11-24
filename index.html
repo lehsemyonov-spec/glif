@@ -34,17 +34,19 @@
       <!-- 1. Hero -->
       <section class="section section--hero" id="hero" data-theme="ink" data-index="1" data-title="Hero">
         <div class="grid-lines" aria-hidden="true"></div>
-        <div class="corner corner--tl mono">U+0416 Ж</div>
-        <div class="corner corner--tr mono">wght 412</div>
-        <div class="corner corner--bl mono">wdth 96</div>
-        <div class="corner corner--br mono">slnt 0</div>
+        <div class="corner corner--tl mono" data-label="code">U+0416 Ж</div>
+        <div class="corner corner--tr mono" data-label="wght">wght 412</div>
+        <div class="corner corner--bl mono" data-label="wdth">wdth 96</div>
+        <div class="corner corner--br mono" data-label="slnt">slnt 0.0</div>
 
-        <div class="glyph-stage" aria-hidden="true">
+        <div class="glyph-stage-wrap" aria-hidden="true">
           <span class="metric-line metric-line--cap"><i class="mono">cap height</i></span>
           <span class="metric-line metric-line--x"><i class="mono">x-height</i></span>
           <span class="metric-line metric-line--base"><i class="mono">baseline</i></span>
-          <span class="giant-glyph" id="hero-glyph">Ж</span>
         </div>
+        <button class="glyph-stage" type="button" aria-label="Следующая буква">
+          <span class="giant-glyph" id="hero-glyph" aria-hidden="true">Ж</span>
+        </button>
 
         <div class="hero__copy">
           <h1 class="hero__slogan">Буквы, которые <em>дышат.</em></h1>

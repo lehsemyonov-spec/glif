@@ -272,6 +272,8 @@ body.no-grid .metric-line {
 .corner--bl { bottom: 20px; left: var(--side); }
 .corner--br { bottom: 20px; right: calc(var(--side-r) + 96px); }
 
+/* Линии метрик и кнопка-буква лежат в одном и том же прямоугольнике */
+.glyph-stage-wrap,
 .glyph-stage {
   position: absolute;
   left: 0;
@@ -279,9 +281,30 @@ body.no-grid .metric-line {
   top: 50%;
   height: var(--glyph-size);
   transform: translateY(-54%);
+  z-index: 1;
+}
+.glyph-stage-wrap {
+  pointer-events: none;
+}
+.glyph-stage {
   display: grid;
   place-items: center;
-  z-index: 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: pan-y;
+}
+.glyph-stage:focus-visible {
+  outline: none;
+}
+.glyph-stage:focus-visible .giant-glyph {
+  text-decoration: underline 2px var(--ultramarine);
+  text-underline-offset: 0.06em;
 }
 
 .giant-glyph {
@@ -290,6 +313,14 @@ body.no-grid .metric-line {
   color: var(--fg);
   font-variation-settings: 'wght' var(--wght), 'wdth' var(--wdth), 'slnt' var(--slnt);
   user-select: none;
+}
+/* Ультрамарин вспыхивает, когда буква отвечает на клик, и уходит обратно в бумагу */
+.giant-glyph.is-flash {
+  animation: glyph-flash 0.9s var(--ease-expo);
+}
+@keyframes glyph-flash {
+  from { color: var(--ultramarine); }
+  to { color: var(--fg); }
 }
 
 /* Линии верхней, роста строчных и базовой проходят через гигантскую букву */
@@ -315,6 +346,9 @@ body.no-grid .metric-line {
   grid-row: 2;
   position: relative;
   z-index: 2;
+  /* Над гигантской буквой текст инвертируется и не теряется */
+  mix-blend-mode: difference;
+  pointer-events: none;
   display: grid;
   gap: 12px;
   max-width: 560px;
@@ -332,7 +366,8 @@ body.no-grid .metric-line {
   margin: 0;
   max-width: 38ch;
   font-size: var(--fs-small);
-  color: var(--warm-grey);
+  color: var(--paper);
+  opacity: 0.62;
 }
 .hero__hint {
   position: absolute;
