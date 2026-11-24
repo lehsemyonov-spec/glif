@@ -1,0 +1,33 @@
+/*
+ * Вариативные шрифты (OFL), обрезанные scripts/subset-fonts.sh.
+ * Диапазоны в @font-face сообщают браузеру, что синтезировать ничего не нужно.
+ */
+@font-face {
+  font-family: 'Glif Grotesk';
+  src: url('/fonts/RobotoFlex.woff2') format('woff2');
+  font-weight: 100 1000;
+  font-stretch: 25% 151%;
+  font-style: oblique 0deg 10deg;
+  font-display: block;
+}
+@font-face {
+  font-family: 'Glif Antiqua';
+  src: url('/fonts/Literata.woff2') format('woff2');
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: 'Glif Antiqua';
+  src: url('/fonts/Literata-Italic.woff2') format('woff2');
+  font-weight: 200 900;
+  font-style: italic;
+  font-display: block;
+}
+@font-face {
+  font-family: 'Glif Mono';
+  src: url('/fonts/JetBrainsMono.woff2') format('woff2');
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: block;
+}

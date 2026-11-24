@@ -1,0 +1,67 @@
+/*
+ * Токены «Глифа». Все цвета, шрифты и метрики — только отсюда.
+ * Сайт сознательно живёт в одном визуальном мире (чёрный ↔ бумага),
+ * поэтому тема задаётся секцией через data-theme, а не системной темой.
+ */
+:root {
+  color-scheme: dark;
+
+  /* Палитра из ТЗ */
+  --ink: #0b0b0c;              /* типографская чёрная */
+  --paper: #f1ede4;            /* бумага */
+  --ultramarine: #2a2eff;      /* акцент: только там, где буква реагирует на человека */
+  --warm-grey: #8c887f;        /* вторичный текст */
+  --rule-on-ink: #f1ede41f;    /* линии разметки на чёрном, бумага 12% */
+  --rule-on-paper: #0b0b0c1f;  /* линии разметки на бумаге, чёрная 12% */
+
+  /* Шрифты: реальные OFL-гарнитуры под вымышленными именами */
+  --font-grotesk: 'Glif Grotesk', 'Roboto Flex', system-ui, sans-serif;
+  --font-antiqua: 'Glif Antiqua', 'Literata', Georgia, serif;
+  --font-mono: 'Glif Mono', 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Метрики Roboto Flex (unitsPerEm 2048) при line-height: 1, в долях em.
+     baseline = asc/upm − ((asc + desc)/upm − 1) / 2 */
+  --rf-baseline: 0.8418;
+  --rf-cap: 0.1309;   /* baseline − capHeight 1456/2048 */
+  --rf-x: 0.3281;     /* baseline − xHeight 1052/2048 */
+
+  /* Сетка */
+  --cols: 12;
+  --gutter: 24px;
+  --side: max(24px, env(safe-area-inset-left, 0px));
+  --side-r: max(24px, env(safe-area-inset-right, 0px));
+  --header-h: 64px;
+
+  /* Типографическая шкала */
+  --fs-mono: 11px;
+  --fs-small: 14px;
+  --fs-body: 18px;
+  --fs-lead: clamp(18px, 1.6vw, 24px);
+  --fs-h2: clamp(40px, 6.4vw, 104px);
+  --fs-h1: clamp(40px, 5.6vw, 88px);
+
+  /* Движение */
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (max-width: 720px) {
+  :root {
+    --cols: 4;
+    --gutter: 16px;
+    --side: max(16px, env(safe-area-inset-left, 0px));
+    --side-r: max(16px, env(safe-area-inset-right, 0px));
+    --header-h: 56px;
+  }
+}
+
+/* Тема секции: переменные --bg/--fg/--rule меняются вместе с фоном */
+[data-theme='ink'] {
+  --bg: var(--ink);
+  --fg: var(--paper);
+  --rule: var(--rule-on-ink);
+}
+[data-theme='paper'] {
+  --bg: var(--paper);
+  --fg: var(--ink);
+  --rule: var(--rule-on-paper);
+}

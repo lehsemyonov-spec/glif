@@ -1,0 +1,312 @@
+/* ---------- Общая секция ---------- */
+.section {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--fg);
+}
+.section--tall {
+  min-height: 160svh;
+}
+
+/* Зерно бумаги на светлых экранах */
+.section[data-theme='paper']::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--grain, 0.07);
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.2 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* 12 колонок: линии рисуются по краям каждой колонки */
+.grid-lines {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  column-gap: var(--gutter);
+  padding: 0 var(--side-r) 0 var(--side);
+  pointer-events: none;
+}
+.grid-lines span {
+  border-left: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+}
+.grid-lines span:nth-child(n + 5) {
+  display: var(--col-5-plus, block);
+}
+@media (max-width: 720px) {
+  .grid-lines span:nth-child(n + 5) {
+    display: none;
+  }
+}
+body.no-grid .grid-lines,
+body.no-grid .metric-line {
+  display: none;
+}
+
+.section__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 32px;
+  align-content: start;
+  padding: calc(var(--header-h) + 72px) var(--side-r) 120px var(--side);
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--warm-grey);
+  text-transform: uppercase;
+}
+
+.section__title {
+  margin: 0;
+  max-width: 18ch;
+  font-size: var(--fs-h2);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-weight: 400;
+  font-variation-settings: 'wght' 360, 'wdth' 88;
+  text-wrap: balance;
+}
+.section__title em {
+  letter-spacing: -0.02em;
+}
+
+.section__text {
+  margin: 0;
+  max-width: 34ch;
+  font-size: var(--fs-lead);
+  color: var(--fg);
+  opacity: 0.85;
+}
+
+/* Заглушка следующего этапа: честно показывает, что здесь появится */
+.stub {
+  justify-self: start;
+  max-width: 64ch;
+  margin: 24px 0 0;
+  padding: 12px 16px;
+  border: 1px dashed var(--rule);
+  color: var(--warm-grey);
+}
+[data-theme='paper'] .stub {
+  border-color: #0b0b0c40;
+}
+
+/* ---------- 1. Hero ---------- */
+.section--hero {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  --glyph-size: min(70svh, 92vw);
+  --wght: 412;
+  --wdth: 96;
+  --slnt: 0;
+}
+
+.corner {
+  position: absolute;
+  z-index: 2;
+  color: var(--warm-grey);
+}
+.corner--tl { top: calc(var(--header-h) + 16px); left: var(--side); }
+.corner--tr { top: calc(var(--header-h) + 16px); right: var(--side-r); text-align: right; }
+.corner--bl { bottom: 20px; left: var(--side); }
+.corner--br { bottom: 20px; right: calc(var(--side-r) + 96px); }
+
+.glyph-stage {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: var(--glyph-size);
+  transform: translateY(-54%);
+  display: grid;
+  place-items: center;
+  z-index: 1;
+}
+
+.giant-glyph {
+  font-size: var(--glyph-size);
+  line-height: 1;
+  color: var(--fg);
+  font-variation-settings: 'wght' var(--wght), 'wdth' var(--wdth), 'slnt' var(--slnt);
+  user-select: none;
+}
+
+/* Линии верхней, роста строчных и базовой проходят через гигантскую букву */
+.metric-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  border-top: 1px solid var(--rule);
+}
+.metric-line i {
+  position: absolute;
+  right: var(--side-r);
+  bottom: 4px;
+  font-style: normal;
+  color: var(--warm-grey);
+}
+.metric-line--cap  { top: calc(var(--glyph-size) * var(--rf-cap)); }
+.metric-line--x    { top: calc(var(--glyph-size) * var(--rf-x)); }
+.metric-line--base { top: calc(var(--glyph-size) * var(--rf-baseline)); border-top-color: #f1ede44d; }
+
+.hero__copy {
+  grid-row: 2;
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 12px;
+  max-width: 560px;
+  padding: 0 var(--side-r) 72px var(--side);
+}
+.hero__slogan {
+  margin: 0;
+  font-size: var(--fs-h1);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-weight: 400;
+  font-variation-settings: 'wght' 420, 'wdth' 90;
+}
+.hero__lead {
+  margin: 0;
+  max-width: 38ch;
+  font-size: var(--fs-small);
+  color: var(--warm-grey);
+}
+.hero__hint {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: 20px;
+  margin: 0;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  color: var(--warm-grey);
+}
+
+@media (max-width: 720px) {
+  .hero__hint {
+    left: var(--side);
+    max-width: calc(100% - var(--side) - 120px);
+    transform: none;
+    white-space: normal;
+  }
+  .corner--br { right: var(--side-r); bottom: 56px; }
+  .corner--bl { bottom: 56px; }
+  .hero__copy { padding-bottom: 96px; }
+}
+
+/* ---------- 3. Распад и сборка ---------- */
+.morph-list {
+  display: grid;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: clamp(28px, 4vw, 56px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variation-settings: 'wght' 340, 'wdth' 90;
+}
+.morph-list li {
+  display: grid;
+  grid-template-columns: 1.6em minmax(0, 1fr);
+  align-items: baseline;
+  gap: 24px;
+}
+.morph-list__glyph {
+  font-size: 1.6em;
+  font-variation-settings: 'wght' 700, 'wdth' 100;
+}
+
+/* ---------- 4. Поле букв ---------- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--gutter);
+  margin: 24px 0 0;
+}
+.stats div {
+  display: grid;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid var(--fg);
+}
+.stats dt {
+  color: var(--warm-grey);
+  text-transform: uppercase;
+}
+.stats dd {
+  margin: 0;
+  font-size: clamp(40px, 6vw, 96px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  font-variation-settings: 'wght' 300, 'wdth' 80;
+}
+@media (max-width: 720px) {
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ---------- 5. Лаборатория ---------- */
+.lab-sample {
+  margin: 0;
+  font-size: clamp(40px, 7vw, 120px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variation-settings: 'wght' 400, 'wdth' 100;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- 6. Витрина ---------- */
+.specimens {
+  display: grid;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.specimen {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1.4fr);
+  align-items: baseline;
+  gap: var(--gutter);
+  padding: 28px 0;
+  border-top: 1px solid var(--rule);
+}
+.specimen:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+.specimen__name {
+  font-size: clamp(32px, 4.4vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.specimen--grotesk .specimen__name { font-variation-settings: 'wght' 700, 'wdth' 110; }
+.specimen--antiqua .specimen__name { font-family: var(--font-antiqua); font-weight: 400; }
+.specimen--mono .specimen__name { font-family: var(--font-mono); font-weight: 500; letter-spacing: -0.04em; }
+.specimen__tag { color: var(--warm-grey); }
+.specimen__about { color: var(--fg); opacity: 0.8; font-size: var(--fs-small); }
+@media (max-width: 720px) {
+  .specimen { grid-template-columns: 1fr; gap: 8px; }
+}
+
+/* ---------- 7. Финал ---------- */
+.cta-word {
+  margin: 0;
+  font-size: 30vw;
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+  font-variation-settings: 'wght' 800, 'wdth' 100;
+}
+.section--cta .btn {
+  justify-self: start;
+}

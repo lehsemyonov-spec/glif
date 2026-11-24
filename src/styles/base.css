@@ -1,0 +1,201 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-grotesk);
+  font-size: var(--fs-body);
+  line-height: 1.45;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Пока шрифты не загрузились, показываем только прелоадер: никакого мигания системного шрифта */
+body.is-loading main,
+body.is-loading .site-header,
+body.is-loading .site-footer,
+body.is-loading .section-counter {
+  visibility: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+em {
+  font-family: var(--font-antiqua);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ultramarine);
+  outline-offset: 4px;
+}
+
+/* ---------- Прелоадер ---------- */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 24px;
+  background: var(--ink);
+  color: var(--paper);
+  transition: opacity 0.6s var(--ease-expo), visibility 0s linear 0.6s;
+}
+.preloader__glyph {
+  /* Системный шрифт до загрузки — поэтому буква видна только после первого шрифта */
+  font-family: var(--font-grotesk);
+  font-size: clamp(96px, 18vw, 220px);
+  line-height: 1;
+  font-variation-settings: 'wght' 300, 'wdth' 100;
+}
+.preloader__count {
+  color: var(--warm-grey);
+}
+body:not(.is-loading) .preloader {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* ---------- Шапка ---------- */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  height: calc(var(--header-h) + env(safe-area-inset-top, 0px));
+  padding: env(safe-area-inset-top, 0px) var(--side-r) 0 var(--side);
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  color: var(--paper);
+  /* Инвертируется над бумажными экранами */
+  mix-blend-mode: difference;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: baseline;
+  font-size: 28px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.logo span {
+  font-variation-settings: 'wght' var(--w, 400), 'wdth' 100;
+  transition: font-variation-settings 0.5s var(--ease-expo);
+}
+/* При наведении толщины перетекают в обратную сторону */
+.logo:hover span:nth-child(1) { --w: 900; }
+.logo:hover span:nth-child(2) { --w: 667; }
+.logo:hover span:nth-child(3) { --w: 433; }
+.logo:hover span:nth-child(4) { --w: 200; }
+.logo__dot {
+  color: var(--ultramarine);
+  font-variation-settings: 'wght' 900;
+}
+/* В режиме difference ультрамарин превратился бы в жёлтый — точку из бленда исключить нельзя,
+   поэтому в шапке точка бумажная, а ультрамариновая живёт в финале */
+.site-header .logo__dot {
+  color: var(--paper);
+}
+
+.site-nav {
+  display: flex;
+  gap: 28px;
+  margin-left: auto;
+  font-size: var(--fs-small);
+}
+.site-nav a,
+.btn {
+  font-variation-settings: 'wght' 380, 'wdth' 100;
+  transition: font-variation-settings 0.35s var(--ease-expo);
+}
+.site-nav a:hover,
+.site-nav a:focus-visible,
+.btn:hover,
+.btn:focus-visible {
+  font-variation-settings: 'wght' 760, 'wdth' 112;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 16px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: var(--fs-small);
+  white-space: nowrap;
+}
+.btn--large {
+  height: 56px;
+  padding: 0 28px;
+  font-size: var(--fs-body);
+}
+
+@media (max-width: 720px) {
+  .site-nav {
+    display: none;
+  }
+  .site-header .btn {
+    margin-left: auto;
+  }
+}
+
+/* ---------- Номер раздела ---------- */
+.section-counter {
+  position: fixed;
+  right: var(--side-r);
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  z-index: 50;
+  color: var(--paper);
+  mix-blend-mode: difference;
+  font-size: 12px;
+}
+
+/* ---------- Футер ---------- */
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 32px;
+  padding: 32px var(--side-r) calc(32px + env(safe-area-inset-bottom, 0px)) var(--side);
+  background: var(--bg);
+  color: var(--warm-grey);
+  font-size: var(--fs-small);
+  border-top: 1px solid var(--rule);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

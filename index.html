@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Глиф — шрифтовая студия</title>
+    <meta name="description" content="Глиф — вымышленная шрифтовая студия: вариативные гарнитуры, в которых кириллица — оригинал. Концепт для портфолио." />
+    <meta name="theme-color" content="#0B0B0C" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href="/fonts/RobotoFlex.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/JetBrainsMono.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Literata-Italic.woff2" as="font" type="font/woff2" crossorigin />
+  </head>
+  <body class="is-loading">
+    <!-- 0. Прелоадер: держит экран, пока не загрузятся все шрифты -->
+    <div class="preloader" id="preloader" aria-hidden="true">
+      <span class="preloader__glyph">Ж</span>
+      <span class="preloader__count mono">глифов отрисовано: <span id="preloader-count">0</span> / 2 400</span>
+    </div>
+
+    <header class="site-header">
+      <a class="logo" href="#hero" aria-label="глиф. — на главную">
+        <span style="--w: 200">г</span><span style="--w: 433">л</span><span style="--w: 667">и</span><span style="--w: 900">ф</span><span class="logo__dot">.</span>
+      </a>
+      <nav class="site-nav" aria-label="Разделы">
+        <a href="#showcase">Гарнитуры</a>
+        <a href="#lab">Лаборатория</a>
+        <a href="#field">Студия</a>
+      </nav>
+      <a class="btn" href="#cta">Заказать шрифт</a>
+    </header>
+
+    <main>
+      <!-- 1. Hero -->
+      <section class="section section--hero" id="hero" data-theme="ink" data-index="1" data-title="Hero">
+        <div class="grid-lines" aria-hidden="true"></div>
+        <div class="corner corner--tl mono">U+0416 Ж</div>
+        <div class="corner corner--tr mono">wght 412</div>
+        <div class="corner corner--bl mono">wdth 96</div>
+        <div class="corner corner--br mono">slnt 0</div>
+
+        <div class="glyph-stage" aria-hidden="true">
+          <span class="metric-line metric-line--cap"><i class="mono">cap height</i></span>
+          <span class="metric-line metric-line--x"><i class="mono">x-height</i></span>
+          <span class="metric-line metric-line--base"><i class="mono">baseline</i></span>
+          <span class="giant-glyph" id="hero-glyph">Ж</span>
+        </div>
+
+        <div class="hero__copy">
+          <h1 class="hero__slogan">Буквы, которые <em>дышат.</em></h1>
+          <p class="hero__lead">Шрифтовая студия. Вариативные гарнитуры, в которых кириллица — не перевод, а оригинал.</p>
+        </div>
+        <p class="hero__hint mono">двигайте курсор · клик — следующая буква</p>
+      </section>
+
+      <!-- 2. Анатомия -->
+      <section class="section" id="anatomy" data-theme="ink" data-index="2" data-title="Анатомия">
+        <div class="grid-lines" aria-hidden="true"></div>
+        <div class="section__inner">
+          <p class="eyebrow mono">§ 02 · Анатомия</p>
+          <h2 class="section__title">У каждой буквы есть <em>скелет.</em></h2>
+          <p class="section__text">Мы начинаем с самых сложных знаков — Ж, Ф, Я. Если они стоят уверенно, остальные выстраиваются сами.</p>
+          <p class="stub mono">этап 3 · контур из шрифта с узлами Безье и выноски: штамп · апертура · контрформа · базовая линия · рост строчных · засечка</p>
+        </div>
+      </section>
+
+      <!-- 3. Распад и сборка -->
+      <section class="section section--tall" id="morph" data-theme="ink" data-index="3" data-title="Распад и сборка">
+        <div class="grid-lines" aria-hidden="true"></div>
+        <div class="section__inner">
+          <p class="eyebrow mono">§ 03 · Распад и сборка</p>
+          <ul class="morph-list">
+            <li><span class="morph-list__glyph">Ж</span><span>Симметрия <em>и напряжение.</em></span></li>
+            <li><span class="morph-list__glyph">Ф</span><span>Круг, <em>рассечённый пополам.</em></span></li>
+            <li><span class="morph-list__glyph">Я</span><span>Буква, которая <em>смотрит назад.</em></span></li>
+          </ul>
+          <p class="stub mono">этапы 4–5 · частицы, морфинг Ж → Ф → Я, пролёт сквозь контрформу «Ф» на бумагу</p>
+        </div>
+      </section>
+
+      <!-- 4. Поле букв -->
+      <section class="section" id="field" data-theme="paper" data-index="4" data-title="Поле букв">
+        <div class="grid-lines" aria-hidden="true"></div>
+        <div class="section__inner">
+          <p class="eyebrow mono">§ 04 · Поле букв</p>
+          <h2 class="section__title">Две тысячи четыреста глифов. <em>Каждый — вручную.</em></h2>
+          <dl class="stats">
+            <div><dt class="mono">семейства</dt><dd>3</dd></div>
+            <div><dt class="mono">глифов</dt><dd>2 400</dd></div>
+            <div><dt class="mono">языков</dt><dd>140</dd></div>
+            <div><dt class="mono">лет</dt><dd>9</dd></div>
+          </dl>
+          <p class="stub mono">этап 6 · сетка из ~200 букв с линзой от курсора и волной дыхания</p>
+        </div>
+      </section>
+
+      <!-- 5. Лаборатория -->
+      <section class="section" id="lab" data-theme="paper" data-index="5" data-title="Лаборатория">
+        <div class="grid-lines" aria-hidden="true"></div>
+        <div class="section__inner">
+          <p class="eyebrow mono">§ 05 · Лаборатория</p>
+          <h2 class="section__title">Напечатайте что-нибудь. <em>Мы подождём.</em></h2>
+          <p class="lab-sample">Съешь же ещё этих мягких французских булок</p>
+          <p class="stub mono">этап 7 · ввод, слайдеры Толщина · Ширина · Наклон · Размер, пресеты, «Волна», копирование CSS</p>
+        </div>
+      </section>
+
+      <!-- 6. Витрина гарнитур -->
+      <section class="section" id="showcase" data-theme="ink" data-index="6" data-title="Витрина гарнитур">
+        <div class="grid-lines" aria-hidden="true"></div>
+        <div class="section__inner">
+          <p class="eyebrow mono">§ 06 · Витрина</p>
+          <h2 class="section__title">Три гарнитуры. <em>Три характера.</em></h2>
+          <ul class="specimens">
+            <li class="specimen specimen--grotesk">
+              <span class="specimen__name">Глиф Гротеск</span>
+              <span class="specimen__tag mono">5 осей · вариативный</span>
+              <span class="specimen__about">Для интерфейсов, вывесок и всего, что должно читаться с лёту.</span>
+            </li>
+            <li class="specimen specimen--antiqua">
+              <span class="specimen__name">Глиф Антиква</span>
+              <span class="specimen__tag mono">книжная · с курсивом</span>
+              <span class="specimen__about">Для длинного чтения и тихих акцентов.</span>
+            </li>
+            <li class="specimen specimen--mono">
+              <span class="specimen__name">Глиф Моно</span>
+              <span class="specimen__tag mono">моноширинный · лигатуры</span>
+              <span class="specimen__about">Для кода, цифр и людей, которые любят порядок.</span>
+            </li>
+          </ul>
+          <p class="stub mono">этап 8 · закреплённый экран, полосы едут вбок, наведение раскрывает специмен</p>
+        </div>
+      </section>
+
+      <!-- 7. Финал -->
+      <section class="section section--cta" id="cta" data-theme="ink" data-index="7" data-title="Финал">
+        <div class="grid-lines" aria-hidden="true"></div>
+        <div class="section__inner">
+          <p class="eyebrow mono">§ 07 · Финал</p>
+          <h2 class="section__title">Каждое слово начинается <em>с одной буквы.</em></h2>
+          <p class="cta-word">глиф<span class="logo__dot">.</span></p>
+          <a class="btn btn--large" href="#cta">Начать свой шрифт</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" data-theme="ink">
+      <span>© Глиф, 2026 · Концепт для портфолио · Дизайн и моушн — [твоё имя]</span>
+      <span class="mono">сайт набран открытыми шрифтами Roboto Flex, Literata и JetBrains Mono (OFL)</span>
+    </footer>
+
+    <div class="section-counter mono" aria-hidden="true">§ <span id="section-current">01</span> / 07</div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
