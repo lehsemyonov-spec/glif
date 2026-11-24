@@ -25,5 +25,6 @@ https://claude.ai/artifact/TcsqsrMVXGV4fnm624BuV2
   включая параметрические оси Roboto Flex (XOPQ, YTUC и др.). Решение заказчика.
 - **Исходные TTF лежат в `fonts-src/`, а не в `public/fonts-src/`**, чтобы не
   попадать в сборку. Обрезка: `npm run fonts` (нужны `pip install fonttools brotli`).
+- **Линии разметки тише, чем в ТЗ:** 5% на чёрном и 7% на бумаге вместо 12%.
 - **Debug-панель** открывается и по `?debug`, и по `#debug` (на хостингах, где
   query-строка недоступна).

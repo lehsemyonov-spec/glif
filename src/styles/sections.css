@@ -157,7 +157,7 @@ body.no-grid .metric-line {
 }
 .metric-line--cap  { top: calc(var(--glyph-size) * var(--rf-cap)); }
 .metric-line--x    { top: calc(var(--glyph-size) * var(--rf-x)); }
-.metric-line--base { top: calc(var(--glyph-size) * var(--rf-baseline)); border-top-color: #f1ede44d; }
+.metric-line--base { top: calc(var(--glyph-size) * var(--rf-baseline)); border-top-color: #f1ede42e; }
 
 .hero__copy {
   grid-row: 2;
@@ -302,9 +302,9 @@ body.no-grid .metric-line {
 /* ---------- 7. Финал ---------- */
 .cta-word {
   margin: 0;
-  font-size: 30vw;
+  font-size: 27vw;
   line-height: 0.8;
-  letter-spacing: -0.05em;
+  letter-spacing: 0.02em;
   font-variation-settings: 'wght' 800, 'wdth' 100;
 }
 .section--cta .btn {
