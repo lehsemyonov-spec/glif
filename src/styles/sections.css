@@ -82,23 +82,33 @@ body.no-grid .metric-line {
 }
 
 /* ---------- 2. Em-квадрат с вращающейся буквой ---------- */
-.anatomy-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(180px, 16vw, 240px);
+/* Текст и квадрат в одну строку; сторона квадрата = высота текстового блока (см. ui/emBox.ts) */
+.anatomy-top {
+  display: flex;
   gap: var(--gutter);
-  align-items: start;
+  align-items: flex-start;
 }
-@media (max-width: 960px) {
-  .anatomy-row { grid-template-columns: minmax(0, 1fr) clamp(200px, 32vw, 280px); }
+.anatomy-text {
+  flex: 0 0 min(560px, 58%);
+  min-width: 0;
+  display: grid;
+  gap: 24px;
+  align-content: start;
+}
+.anatomy-text .stub {
+  margin-top: 0;
 }
 @media (max-width: 560px) {
-  .anatomy-row { grid-template-columns: minmax(0, 1fr); }
+  .anatomy-top { flex-direction: column; }
+  .anatomy-text { flex-basis: auto; }
   .em-box { width: min(100%, 280px); }
 }
 
 .em-box {
   position: relative;
+  flex: none;
   margin: 0;
+  width: var(--em-size, 280px);
   aspect-ratio: 1;
   max-width: 100%;
   display: grid;
@@ -150,7 +160,8 @@ body.no-grid .metric-line {
 /* ---------- 2. Глоссарий анатомии ---------- */
 .glossary {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 24px 0 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0 var(--gutter);
 }
 .glossary div {
@@ -169,6 +180,9 @@ body.no-grid .metric-line {
   line-height: 1.5;
   color: var(--fg);
   opacity: 0.78;
+}
+@media (max-width: 960px) {
+  .glossary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 560px) {
   .glossary { grid-template-columns: minmax(0, 1fr); }
