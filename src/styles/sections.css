@@ -81,6 +81,72 @@ body.no-grid .metric-line {
   .split__main, .split__aside { grid-column: 1 / -1; }
 }
 
+/* ---------- 2. Em-квадрат с вращающейся буквой ---------- */
+.anatomy-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(180px, 16vw, 240px);
+  gap: var(--gutter);
+  align-items: start;
+}
+@media (max-width: 960px) {
+  .anatomy-row { grid-template-columns: minmax(0, 1fr) clamp(200px, 32vw, 280px); }
+}
+@media (max-width: 560px) {
+  .anatomy-row { grid-template-columns: minmax(0, 1fr); }
+  .em-box { width: min(100%, 280px); }
+}
+
+.em-box {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 1;
+  max-width: 100%;
+  display: grid;
+  place-items: center;
+  border: 1px solid #f1ede442;
+  perspective: 600px;
+  overflow: hidden;
+  /* Сетка редактора шрифтов: мелкий шаг 1/16, оси через центр */
+  background-image:
+    linear-gradient(#f1ede433, #f1ede433),
+    linear-gradient(#f1ede433, #f1ede433),
+    linear-gradient(to right, #f1ede40f 1px, transparent 1px),
+    linear-gradient(to bottom, #f1ede40f 1px, transparent 1px);
+  background-size: 1px 100%, 100% 1px, 6.25% 6.25%, 6.25% 6.25%;
+  background-position: center, center, 0 0, 0 0;
+  background-repeat: no-repeat, no-repeat, repeat, repeat;
+}
+.em-box__label {
+  position: absolute;
+  z-index: 1;
+  color: var(--warm-grey);
+  font-size: 10px;
+}
+.em-box__label--tl { top: 8px; left: 10px; }
+.em-box__label--br { right: 10px; bottom: 8px; }
+
+.em-box__glyph {
+  line-height: 1;
+  user-select: none;
+  transform-style: preserve-3d;
+  animation: em-spin 6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+/* Размер буквы — от стороны квадрата, а не от экрана */
+.em-box { container-type: inline-size; }
+.em-box__glyph { font-size: 62cqi; }
+
+/* Оборот вокруг вертикальной оси; на ребре буква становится тоньше и уже */
+@keyframes em-spin {
+  0%   { transform: rotateY(0deg);   font-variation-settings: 'wght' 300, 'wdth' 100; }
+  25%  { transform: rotateY(90deg);  font-variation-settings: 'wght' 900, 'wdth' 60; }
+  50%  { transform: rotateY(180deg); font-variation-settings: 'wght' 300, 'wdth' 100; }
+  75%  { transform: rotateY(270deg); font-variation-settings: 'wght' 900, 'wdth' 60; }
+  100% { transform: rotateY(360deg); font-variation-settings: 'wght' 300, 'wdth' 100; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .em-box__glyph { animation: none; font-variation-settings: 'wght' 300, 'wdth' 100; }
+}
+
 /* ---------- 2. Глоссарий анатомии ---------- */
 .glossary {
   display: grid;

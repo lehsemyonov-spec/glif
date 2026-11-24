@@ -7,6 +7,7 @@ import { loadFonts } from './fonts';
 import { createPreloader } from './ui/preloader';
 import { initGridLines } from './ui/grid';
 import { initSectionCounter } from './ui/sectionCounter';
+import { initEmBox } from './ui/emBox';
 
 async function boot() {
   initGridLines();
@@ -16,6 +17,7 @@ async function boot() {
   await preloader.finish();
 
   initSectionCounter();
+  initEmBox();
 
   // ?debug в адресе или #debug (на хостингах, где query-строка недоступна)
   if (new URLSearchParams(location.search).has('debug') || location.hash === '#debug') {
