@@ -7,8 +7,9 @@
   background: var(--bg);
   color: var(--fg);
 }
-.section--tall {
-  min-height: 160svh;
+/* Высота обычной секции — по содержимому; на весь экран только hero */
+.section:not(.section--hero) {
+  min-height: 0;
 }
 
 /* Зерно бумаги на светлых экранах */
@@ -54,9 +55,80 @@ body.no-grid .metric-line {
   position: relative;
   z-index: 1;
   display: grid;
-  gap: 32px;
+  gap: 24px;
   align-content: start;
-  padding: calc(var(--header-h) + 72px) var(--side-r) 120px var(--side);
+  padding: 96px var(--side-r) 72px var(--side);
+}
+
+/* Две колонки по 12-колоночной сетке: текст слева, справа справочный блок */
+.split {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  align-items: start;
+}
+.split__main {
+  grid-column: 1 / span 6;
+  display: grid;
+  gap: 24px;
+  align-content: start;
+}
+.split__aside {
+  grid-column: 8 / -1;
+  margin: 0;
+}
+@media (max-width: 960px) {
+  .split { grid-template-columns: minmax(0, 1fr); row-gap: 40px; }
+  .split__main, .split__aside { grid-column: 1 / -1; }
+}
+
+/* ---------- 2. Глоссарий анатомии ---------- */
+.glossary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--gutter);
+}
+.glossary div {
+  display: grid;
+  gap: 8px;
+  padding: 16px 0 20px;
+  border-top: 1px solid #f1ede42e;
+}
+.glossary dt {
+  color: var(--fg);
+  text-transform: uppercase;
+}
+.glossary dd {
+  margin: 0;
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--fg);
+  opacity: 0.78;
+}
+@media (max-width: 560px) {
+  .glossary { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---------- 3. Карточка буквы ---------- */
+.glyph-card {
+  display: grid;
+  gap: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #f1ede42e;
+}
+.glyph-card__glyph {
+  font-size: clamp(160px, 22vw, 340px);
+  line-height: 0.9;
+  text-align: center;
+  font-variation-settings: 'wght' 250, 'wdth' 100;
+}
+.glyph-card__specs {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 6px 24px;
+  color: var(--warm-grey);
+}
+.glyph-card__specs span:nth-child(even) {
+  color: var(--fg);
 }
 
 .eyebrow {
